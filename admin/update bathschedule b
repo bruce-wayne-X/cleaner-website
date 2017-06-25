@@ -1,0 +1,58 @@
+update bathschedule b
+inner join schedulelist s on
+    b.id = s.udid
+set 
+b.`9` = s.`9`
+b.`9.5` = s.`9.5`
+b.`10` = s.`10`
+b.`10.5` = s.`10.5`
+b.`11` = s.`11`
+b.`11.5` = s.`11.5`
+b.`12` = s.`12`
+b.`12.5` = s.`12.5`
+b.`13` = s.`13`
+b.`13.5` = s.`13.5`
+b.`14` = s.`14`
+b.`14.5` = s.`14.5`
+b.`15` = s.`15`
+b.`15.5` = s.`15.5`
+b.`16` = s.`16`
+b.`16.5` = s.`16.5`
+b.`17` = s.`17`
+b.`17.5` = s.`17.5`
+b.`18` = s.`18`
+b.`18.5` = s.`18.5`
+b.`19` = s.`19`
+b.`19.5` = s.`19.5`
+b.`20` = s.`20`
+b.`20` = s.`20.5`
+;
+update bathschedule b inner join schedulelist s on b.scheduleno = s.scheduleno set b.`9` = s.`9`, b.`9.5` = s.`9.5`, b.`10` = s.`10`, b.`10.5` = s.`10.5`, b.`11` = s.`11`, b.`11.5` = s.`11.5`, b.`12` = s.`12`, b.`12.5` = s.`12.5`, b.`13` = s.`13`, b.`13.5` = s.`13.5`, b.`14` = s.`14`, b.`14.5` = s.`14.5`, b.`15` = s.`15`, b.`15.5` = s.`15.5`, b.`16` = s.`16`, b.`16.5` = s.`16.5`, b.`17` = s.`17`, b.`17.5` = s.`17.5`, b.`18` = s.`18`, b.`18.5` = s.`18.5`, b.`19` = s.`19`, b.`19.5` = s.`19.5`, b.`20` = s.`20`, b.`20` = s.`20.5` 
+    <table border="1 px" width="100%">
+    <tr>
+    	<th>Id</th>
+		<th>Cleaning Date and Time</th>
+		<th>Alert the Engineer?</th>
+		<th>Any Additional COmments?</th>
+		<th>Incharge</th>
+		<th>Edit</th>
+		<th>Delete</th>
+		<th>Bathroom_details</th>
+	</tr>
+	<?php
+		mysql_connect("localhost","root","") or die(mysql_error());
+		mysql_select_db("first_db") or die("Cannor connect to server");
+		$query=mysql_query("Select * from bathrooms ");
+		while($row=mysql_fetch_array($query))
+		{
+			Print("<tr>");
+			Print('<td align="center"> '.$row['id'].'</td>');
+			Print('<td align="center"> '.$row['last_cleaned_date']." - ".$row['last_cleaned_time'].'</td>');
+			Print('<td align="center"> '.$row['alert_engineer'].'</td>');						
+			Print('<td align="center"> '.$row['additional_comments'].'</td>');									
+			Print('<td align="center"> <a href="editadmin.php?id='.$row['id'].'">edit </a> </td>'); 
+			Print '<td align="center"><a href="#" onclick="myFunction('.$row['id'].')">delete</a> </td>';
+			Print('<td align="center"> '.$row['bathroom_details'].'</td>');
+		}
+	?>
+	</table>
