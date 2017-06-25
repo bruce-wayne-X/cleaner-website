@@ -1,0 +1,81 @@
+change `9.5` `9.5` int(11) not null default 0,
+change `10` `10` int(11) not null default 0,
+change `10.5` `10.5` int(11) not null default 0,
+change `11` `11` int(11) not null default 0,
+change `11.5` `11.5` int(11) not null default 0,
+change `12` `12` int(11) not null default 0,
+change `12.5` `12.5` int(11) not null default 0,
+change `13` `13` int(11) not null default 0,
+change `13.5` `13.5` int(11) not null default 0,
+change `14` `14` int(11) not null default 0,
+change `14.5` `14.5` int(11) not null default 0,
+change `15` `15` int(11) not null default 0,
+change `15.5` `15.5` int(11) not null default 0,
+change `16` `16` int(11) not null default 0,
+change `16.5` `16.5` int(11) not null default 0,
+change `17` `17` int(11) not null default 0,
+change `17` `17` int(11) not null default 0,
+change `18` `18` int(11) not null default 0,
+change `18.5` `18.5` int(11) not null default 0,
+change `19` `19` int(11) not null default 0,
+change `19.5` `19.5` int(11) not null default 0,
+change `20` `20` int(11) not null default 0,
+change `20.5` `20.5` int(11) not null default 0;
+
+ALTER TABLE `cleaners` CHANGE `9` `9` INT(11) NOT NULL DEFAULT '0';
+alter table cleaners 
+change `9.5` `9.5` int(11) not null default 0,
+change `10` `10` int(11) not null default 0,
+change `10.5` `10.5` int(11) not null default 0,
+change `11` `11` int(11) not null default 0,
+change `11.5` `11.5` int(11) not null default 0,
+change `12` `12` int(11) not null default 0,
+change `12.5` `12.5` int(11) not null default 0,
+change `13` `13` int(11) not null default 0,
+change `13.5` `13.5` int(11) not null default 0,
+change `14` `14` int(11) not null default 0,
+change `14.5` `14.5` int(11) not null default 0,
+change `15` `15` int(11) not null default 0,
+change `15.5` `15.5` int(11) not null default 0,
+change `16` `16` int(11) not null default 0,
+change `16.5` `16.5` int(11) not null default 0,
+change `17` `17` int(11) not null default 0,
+change `17` `17` int(11) not null default 0,
+change `18` `18` int(11) not null default 0,
+change `18.5` `18.5` int(11) not null default 0,
+change `19` `19` int(11) not null default 0,
+change `19.5` `19.5` int(11) not null default 0,
+change `20` `20` int(11) not null default 0,
+change `20.5` `20.5` int(11) not null default 0;
+
+
+		/*foreach($row as $key => $value)
+			{
+				$x++;		    
+			    if ($value==1)
+			    printf("<td>%s %s</td>", $key,$value);
+				<select name="dropdown">
+					<?php 
+					$sql = mysql_query("SELECT name FROM cleaners");
+					while ($row = $sql->fetch_assoc()){
+					echo "<option value=\"owner1\">" . $row['name'] . "</option>";
+					}
+					?>
+				</select>			    
+			}*/
+
+						    /*<?php
+					$sql = mysql_query("SELECT * FROM cleaners where ");
+					while ($rwl = mysql_fetch_array($sql))
+					{
+	               
+	                  $idl = $rwl['id'];
+	                  $namel = $rwl['name']; //string type
+	                  $p=(string)$x;
+	               	if($rwl[$p]==0)
+	                  {echo '<option value="'.$idl.'">'.$namel.'</option>';
+	                  }
+					}
+				?>
+			    */
+

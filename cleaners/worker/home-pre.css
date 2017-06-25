@@ -1,0 +1,43 @@
+* {  
+  font-family: 'Raleway', 'Arial', sans-serif; 
+  box-sizing: border-box;
+  background-color: rgb(205,255,255);
+
+}
+
+a {
+  max-width: 10em;
+  color: SeaGreen;
+  text-decoration: none;
+  float:right;  
+  margin-right: 2em; 
+}
+
+h2{	
+	width: 100%;
+	position:relative;
+	margin: auto;
+	text-align: center; 
+}
+
+#content{
+	padding-left: 2em;
+}
+
+
+#greet{
+	width: 100%;
+	position:relative;
+	margin-top: 1em;	
+	text-align: center; 
+}
+
+h3{
+	width:100%;
+	padding-left: 2em;
+}
+
+li{
+	max-width: 20em;
+	padding: 0.5em 0.5em;
+}
