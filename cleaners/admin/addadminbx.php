@@ -31,10 +31,7 @@
 			$ask=mysql_query("select * from occasion_schedule where building = '$building' and floor = '$floor' and id = '$bname' and date_of_occ = '$dato';");
 			if(mysql_num_rows($ask)==0)
 			{
-				$puchle = mysql_query("select * from bathschedule where building = '$building' and floor = '$floor' and id = '$bname';");
-				$mil = mysql_fetch_assoc($puchle);
-				$tp = $mil['type'];
-				mysql_query("insert into occasion_schedule (building,floor,id,date_of_occ,type) values ('$building','$floor','$bname','$dato','$tp')");	
+				mysql_query("insert into occasion_schedule (building,floor,id,date_of_occ) values ('$building','$floor','$bname','$dato')");	
 			}			
 			mysql_query("update occasion_schedule set scheduleno='$snoo' where building = '$building' and floor = '$floor' and id = '$bname' and date_of_occ = '$dato';");		
 			mysql_query("select * from occasion_schedule;"); //SQL query

@@ -13,25 +13,7 @@
         <title>My first PHP Website</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel= "stylesheet" href="home.css" type="text/css">                    
-        <script type="text/javascript">
-		    var datefield=document.createElement("input")
-		    datefield.setAttribute("type", "date")
-		    if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
-		        document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
-		        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
-		        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n') 
-		    }
-		</script>
-		 
-		<script>
-		if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
-		    jQuery(function($){ //on document.ready
-		        $('#dato').datepicker({
-		        	dateFormat: 'yy-mm-dd'
-		        });
-		    })
-		}
-		</script>
+
         <script type="text/javascript">
 
 			function showUser(str,str2,str3) {
@@ -368,14 +350,24 @@
 				<input type="radio" name="group2" id="for1" value="Week" onclick="hide();" checked>Week Days
 				<input type="radio" name="group2" id="for2" value="Special" onclick="show();" >Special Occasions	
 				<input type="radio" name="group2" id="for3" value="Both" onclick="hide();" >Weekend<br><br>
-				<div id="date" style="display: none;"">Select Date <input type="date" name="date" value="date" id="dato"></div>
+<!-- cdn for modernizr, if you haven't included it already -->
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/extras/modernizr-custom.js"></script>
+<!-- polyfiller file to detect and load polyfills -->
+<script src="http://cdn.jsdelivr.net/webshim/1.12.4/polyfiller.js"></script>
+<script>
+  webshims.setOptions('waitReady', false);
+  webshims.setOptions('forms-ext', {types: 'date'});
+  webshims.polyfill('forms forms-ext');
+</script>
+				<div id="date" style="display: none;"">Select Date <input type="date" name="date" value="date"></div>
 			</div>
 			<br>
 			<input type="submit" value="Allocate schedule!"/> 		
 		</form>
 	</div>
 	</div>
-	<br><br>	
+	<br><br>
+
 	<h1 align="center" id="faltu">Schedule Display </h1>
 	<div class="show">
 	<?php
@@ -393,14 +385,6 @@
 	?>
 	<div id="displayfloorx"></div>
 	<div id="showtable">
-	<br><div class="body1">
-	<div class="tabbed">
-      <input name="tabbed" id="tabbed1" type="radio" checked>
-      <section>
-        <h1>
-          <label for="tabbed1">Week Days</label>
-        </h1>
-        <div>
 		<ul class="ulist">
 		<?php
 			mysql_connect("localhost","root","") or die(mysql_error());
@@ -458,162 +442,7 @@
 		    					if( $x==floor($x)) 	    					
 		    						$xs=$x."am";
 		    					else
-		    						$xs=floor($x).":30am";
-		    				}
-						    echo("Shift: $prevs - $xs</br>");							
-					    }
-					}
-				} 
-				echo("</li><br>");
-			}
-		?>		
-	</ul>
-	</div>
-      </section>
-      <input name="tabbed" id="tabbed2" type="radio">
-      <section>
-        <h1>
-          <label for="tabbed2">Occasion</label>
-        </h1>
-        <div>       
-		<ul class="ulist">
-		<?php
-			mysql_connect("localhost","root","") or die(mysql_error());
-			mysql_select_db("first_db") or die("Cannor connect to server");
-			$query=mysql_query("Select * from occasion_schedule ");
-			while($row=mysql_fetch_array($query))
-			{
-				$rowid=$row['id'];//integer type
-				echo('<li class="list">');
-				echo "Bathroom: $rowid<br>";
-				$x=0;//float type?
-				$y=0;//arity:P
-				$prev;
-				for ($x = 9; $x <= 20.5; $x=$x+0.5) 
-				{
-					if($row["$x"]!=0)
-					{
-					    if($y==0)
-					    {
-					    	$y++;
-					    	$prev=$x;
-					    }
-					    else if($y==1)
-					    {
-						    $y=0;
-						    $prevs="";
-		    				$xs="";
-		    				if($prev>12){
-		    					if( $prev==floor($prev)) 	    					
-		    						$prevs=($prev-12)."pm";	    						    					
-		    					else
-		    						$prevs=(floor($prev)-12).":30pm";
-		    				}
-		    				else if($prev==12){	    				
-		    					$prevs=$prev."pm";
-
-		    				}		    	
-		    				else{
-		    					if( $prev==floor($prev)) 
-		    						$prevs=$prev."am";	  		    			
-		    					else{
-		    						$prevs=floor($prev).":30am";		    					
-		    					}
-
-		    				}
-		    				if($x>12){
-		    					if( $x==floor($x)) 	    					
-		    						$xs=($x-12)."pm";
-		    					else
-		    						$xs=(floor($x)-12).":30pm";	    						    				
-		    				}
-		    				else if($x==12){
-		    					$xs=$x."pm";
-		    				}		    	
-		    				else{
-		    					if( $x==floor($x)){ 	    					
-		    						$xs=$x."am";
-		    						echo "true";
-		    					}
-		    					else
-		    						$xs=floor($x).":30am";
-		    				}			    				
-						    echo("Shift: $prevs - $xs</br>");							
-					    }
-					}
-				} 
-				echo("Date: ");
-				echo $row['date_of_occ'];				
-				echo("<br></li><br>");
-			}
-		?>		
-	</ul>
-	</div>
-      </section>
-      <input name="tabbed" id="tabbed3" type="radio">
-      <section>
-        <h1>
-          <label for="tabbed3">Weekend</label>
-        </h1>
-        <div>
-          <ul class="ulist">
-		<?php
-			mysql_connect("localhost","root","") or die(mysql_error());
-			mysql_select_db("first_db") or die("Cannor connect to server");
-			$query=mysql_query("Select * from bathschedule1 ");
-			while($row=mysql_fetch_array($query))
-			{
-				$rowid=$row['id'];//integer type
-				echo('<li class="list">');
-				echo "Bathroom: $rowid<br>";
-				$x=0;//float type?
-				$y=0;//arity:P
-				$prev;
-				for ($x = 9; $x <= 20.5; $x=$x+0.5) 
-				{
-					if($row["$x"]!=0)
-					{
-					    if($y==0)
-					    {
-					    	$y++;
-					    	$prev=$x;
-					    }
-					    else if($y==1)
-					    {
-						    $y=0;
-						    $prevs="";
-		    				$xs="";
-		    				if($prev>12){
-		    					if( $prev==floor($prev)) 	    					
-		    						$prevs=($prev-12)."pm";	    						    					
-		    					else
-		    						$prevs=(floor($prev)-12).":30pm";
-		    				}
-		    				else if($prev==12){	    				
-		    					$prevs=$prev."pm";
-
-		    				}		    	
-		    				else{
-		    					if( $prev==floor($prev))    					
-		    						$prevs=$prev."am";	    					
-		    					else
 		    						$prevs=floor($prev).":30am";
-
-		    				}
-		    				if($x>12){
-		    					if( $x==floor($x)) 	    					
-		    						$xs=($x-12)."pm";
-		    					else
-		    						$xs=(floor($x)-12).":30pm";	    						    				
-		    				}
-		    				else if($x==12){
-		    					$xs=$x."pm";
-		    				}		    	
-		    				else{
-		    					if( $x==floor($x)) 	    					
-		    						$xs=$x."am";
-		    					else
-		    						$xs=floor($x).":30am";
 		    				}
 						    echo("Shift: $prevs - $xs</br>");							
 					    }
@@ -621,16 +450,12 @@
 				} 
 				echo("</li><br>");
 			}
-		?>		
+		?>
 	</ul>
-        </div>
-      </section>
-    </div>
-    </div>
-	</div>	
-	</div>	 
+	</div>
+	</div>  
 </div>
-</body>
+
 </html>	
 
 
