@@ -1,0 +1,138 @@
+body{
+    margin:0;
+    color:#6a6f8c;
+    background:#c8c8c8;
+    font:600 16px/18px 'Open Sans',sans-serif;
+    box-sizing: border-box;
+    
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+select {
+-webkit-appearance:none;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.forms {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+
+.left{ 
+    margin-top: 3em;   
+    width:45%;
+    float:left;
+    margin-left: 2em;
+    clear: left;
+}
+
+.right{
+    margin-top: 3em;
+    width: 45%;
+    float:right;
+    margin-right: 2em;
+    clear: right;
+}
+ 
+.tags
+{
+    text-align: center;
+}
+#faltu{
+    padding-top:2em;
+    clear:both;
+}
+
+.show{
+    margin-left: 2em;
+    max-width: 30%;
+}
+
+.logout{
+    min-height: 3em;
+    width: 7.5em;
+    position: relative;
+    text-align: center;
+    color: white;    
+    background:rgba(40,57,101,.9);
+    margin-right: 2em;  
+    float: right;
+    vertical-align: middle;
+    line-height: 2.9em;    
+    border-radius: 25px;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+#log{
+    color:white;
+}
+#newsh{
+    min-height: 3em;
+    width: 7.5em;
+    position: relative;
+    text-align: center;
+    color: white;    
+    background:rgba(40,57,101,.9);
+    margin-left: 2em;  
+    float: left;
+    vertical-align: middle;
+    line-height: 2.9em;    
+    border-radius: 25px;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+#sch{
+    color:white;
+}
+#title,#greet{
+    margin-top: 1em;
+    text-align: center;
+}
+.list{
+    background:rgba(255,255,255,0.7);
+    width:90%;
+    padding: 0.7em;
+    border-radius: 10px;    
+    box-shadow:0 8px 10px 0 rgba(0,0,0,.20),0 8px 10px 0 rgba(0,0,0,.19);
+}
+input[type="radio"]:checked:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: 3px;
+    left: 3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4CAF50;
+}
+#radio1,#radio2,#radio3,#for1,#for2,#for3{
+    max-width: 33%;
+    margin-left: 6%;
+}
+#date{
+    text-align: center;
+}
