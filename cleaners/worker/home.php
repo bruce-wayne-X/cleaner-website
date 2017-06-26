@@ -111,6 +111,11 @@
 	    	?>        
 	    </p>
 	    </div>
-	    
+ <form action="/action_page.php">
+  Take a Leave<br>
+  Enter Date: <input type="text" name="fname"><br>
+  Enter Reason: <input type="text" name="lname"><br>
+  <input type="submit" value="Submit">
+</form> 	    
     </body>
 </html>	
