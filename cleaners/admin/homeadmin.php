@@ -11,7 +11,7 @@
 <html>
     <head>
         <title>My first PHP Website</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel= "stylesheet" href="home.css" type="text/css">                    
         <script type="text/javascript">
 		    var datefield=document.createElement("input")
@@ -217,7 +217,49 @@
 		        xmlhttp.send();
 				
 		}
+		function datedisplay(building,floor,date)
+		{
+		        //window.alert(5 + 8);
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('datedisplayer').innerHTML = this.responseText;
+		            }
+		        };
+		        //window.alert(5 + 8);
+		        xmlhttp.open("GET","datedisplayer.php?building="+building+"&floor="+floor+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+				
+		}		
+		function datedisplayer(date)
+		{
+		        //window.alert(5 + 8);
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('datedisplayer').innerHTML = this.responseText;
+		            }
+		        };
+		        //window.alert(5 + 8);
+		        xmlhttp.open("GET","datedisplayerd.php?date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+				
+		}		
+
 		function show() { document.getElementById('date').style.display = 'block'; }
+		function asdx(date){window.alert(date);}
         function hide() { document.getElementById('date').style.display = 'none'; }
 	</script>
 
@@ -475,7 +517,20 @@
         <h1>
           <label for="tabbed2">Occasion</label>
         </h1>
-        <div>       
+
+        <div>
+        <?php
+		$query1=mysql_query("Select distinct date_of_occ from occasion_schedule ");
+		echo('<select name="datebuilding" onChange="datedisplayer(this.value)">');
+		echo('<option value="">Choose</option>');
+		while($row=mysql_fetch_array($query1))
+		{
+			$datebuild=$row['date_of_occ'];//integer type				
+			echo('<option value="'.$datebuild.'">'.$datebuild.'</option>');
+		}
+		echo('</select>');
+		?>
+		<div id="datedisplayer">
 		<ul class="ulist">
 		<?php
 			mysql_connect("localhost","root","") or die(mysql_error());
@@ -548,6 +603,7 @@
 			}
 		?>		
 	</ul>
+	</div>
 	</div>
       </section>
       <input name="tabbed" id="tabbed3" type="radio">
