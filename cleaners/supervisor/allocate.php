@@ -91,7 +91,7 @@
 		                document.getElementById('displayfloorx').innerHTML = this.responseText;
 		            }
 		        };
-		        xmlhttp.open("GET","displayfindbuilding.php?id="+qwert()+"&building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.open("GET","displayfindbuilding1.php?id="+qwert()+"&building="+building+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 		}
 		function displaygetDate(date)
