@@ -97,6 +97,7 @@
 		function displaygetDate(date)
 		{		
 				document.getElementById('hikuchh').style.display = 'none';
+				document.getElementById('abuilding1').style.display = 'block';		
 		        if (window.XMLHttpRequest) {
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
 		            xmlhttp = new XMLHttpRequest();
@@ -114,7 +115,8 @@
 		}
 		function allotgetDate(date)
 		{		
-				document.getElementById('hikuch').style.display = 'none';		
+				document.getElementById('hikuch').style.display = 'none';
+				document.getElementById('axbuilding1').style.display = 'block';		
 		        if (window.XMLHttpRequest) {
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
 		            xmlhttp = new XMLHttpRequest();
@@ -263,12 +265,14 @@
             document.getElementById('displayfloorx').innerHTML = "";
             document.getElementById('showtable').innerHTML = "";
             document.getElementById("abuilding").selectedIndex=0;
+            document.getElementById("date_dis1x").selectedIndex=0;
 		}
 		function radio1()
 		{
             document.getElementById('allotfloorx').innerHTML = "";
             document.getElementById('allottable').innerHTML = "";			
             document.getElementById("axbuilding").selectedIndex=0;
+            document.getElementById("date_disx").selectedIndex=0;
 		}
 		function show() { 
 			document.getElementById('date_dis').style.display = 'block';
@@ -276,6 +280,9 @@
 			document.getElementById('hikuch').style.display = 'block';
 		}
 		function hide() { document.getElementById('date_dis').style.display = 'none'; 
+			document.getElementById('hikuch').style.display = 'none';
+			document.getElementById('axbuilding1').style.display = 'none';
+			document.getElementById('axbuilding').style.display = 'block';
 		}
 		function showw() { 
 			document.getElementById('date_dis1').style.display = 'block';
@@ -283,6 +290,9 @@
 			document.getElementById('hikuchh').style.display = 'block';
 		}
 		function hidd() { document.getElementById('date_dis1').style.display = 'none'; 
+			document.getElementById('hikuchh').style.display = 'none';
+			document.getElementById('abuilding1').style.display = 'none';
+			document.getElementById('abuilding').style.display = 'block';
 		}	    		
 		</script>
     </head>
@@ -313,7 +323,7 @@
 		mysql_connect("localhost","root","") or die(mysql_error());
 		mysql_select_db("first_db") or die("Cannor connect to server");
 		$query12=mysql_query("Select distinct date_of_occ from occasion_schedule ");
-		echo('<select name="datebuilding" onChange="allotgetDate(this.value)">');
+		echo('<select id = "date_disx"name="datebuilding" onChange="allotgetDate(this.value)">');
 		echo('<option value="">Choose Date</option>');
 		while($row=mysql_fetch_array($query12))
 		{
@@ -351,7 +361,7 @@
 	<div class="check">Schedule For:		
 		<input type="radio" name="group2" id="2" onchange="radio2()" value="1" checked onclick="hidd();">Week Days
 		<input type="radio" name="group2" id="2" onchange="radio2()" value="2" onclick="showw();">Special Occasions	
-		<input type="radio" name="group2" id="2" onchange="radio2()" value="3"  onclick="hidd();">Weekend<br><br>
+		<input type="radio" name="group2" id="2" onchange="radio2()" value="3" onclick="hidd();">Weekend<br><br>
 	</div>
 	<div id="date_dis1" style="display: none;">
 	<?php
@@ -359,7 +369,7 @@
 		mysql_connect("localhost","root","") or die(mysql_error());
 		mysql_select_db("first_db") or die("Cannor connect to server");
 		$query123=mysql_query("Select distinct date_of_occ from occasion_schedule ");
-		echo('<select name="datebuildingx" onChange="displaygetDate(this.value)">');
+		echo('<select id="date_dis1x" name="datebuildingx" onChange="displaygetDate(this.value)">');
 		echo('<option value="">Choose Date</option>');
 		while($row1=mysql_fetch_array($query123))
 		{
