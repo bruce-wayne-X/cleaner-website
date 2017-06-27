@@ -11,7 +11,11 @@
 		while($row=mysql_fetch_array($query))
 		{
 			$rowid=$row['id'];//integer type
+			$rowb=$row['building'];
+			$rowf=$row['floor'];
 			echo('<li class="list">');
+			echo "Building: $rowb<br>";
+			echo "Floor: $rowf<br>";
 			echo("Bathroom: $rowid</br>");
 		$x=0;//float type?
 		$y=0;//arity:P
