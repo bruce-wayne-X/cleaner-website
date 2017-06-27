@@ -77,6 +77,42 @@
 		        xmlhttp.open("GET","displayfindbuilding.php?id="+qwert()+"&building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 		}
+		function displaygetDate(date)
+		{		
+				document.getElementById('hikuchh').style.display = 'none';
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('abuilding1').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","displayfinddate.php?id="+qwert()+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
+		function allotgetDate(date)
+		{		
+				document.getElementById('hikuch').style.display = 'none';		
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('axbuilding1').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","allotfinddate.php?id="+qwer()+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
 		function allotgetBuilding(building)
 		{
 		        if (window.XMLHttpRequest) {
@@ -119,7 +155,7 @@
 		function displaygetfloor(floor,building)
 		{
 		        //window.alert(5 + 8);
-		        if (window.XMLHttpRequest) {
+		        if (window.XMLHttpRequest) {		        	
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
 		            xmlhttp = new XMLHttpRequest();
 		        } else {
@@ -160,9 +196,21 @@
             document.getElementById('allottable').innerHTML = "";			
             document.getElementById("axbuilding").selectedIndex=0;
 		}
-
-			    
-			</script>
+		function show() { 
+			document.getElementById('date_dis').style.display = 'block';
+			document.getElementById('axbuilding').style.display = 'none';
+			document.getElementById('hikuch').style.display = 'block';
+		}
+		function hide() { document.getElementById('date_dis').style.display = 'none'; 
+		}
+		function showw() { 
+			document.getElementById('date_dis1').style.display = 'block';
+			document.getElementById('abuilding').style.display = 'none';
+			document.getElementById('hikuchh').style.display = 'block';
+		}
+		function hidd() { document.getElementById('date_dis1').style.display = 'none'; 
+		}	    		
+		</script>
     </head>
    
     <body>
@@ -180,13 +228,28 @@
 	<div class="left"><div class="forms">
 	<h1 align="center">Allocation </h1>
 
-			<div class="check">Schedule For:		
-				<input type="radio" name="group1" value="1" checked onchange="radio1()">Week Days
-				<input type="radio" name="group1" value="2" onchange="radio1()">Special Occasions	
-				<input type="radio" name="group1" value="3" onchange="radio1()">Weekend<br><br>
-			</div>
-
-			<div id="myd"></div>
+	<div class="check">Schedule For:		
+		<input type="radio" name="group1" value="1" checked onchange="radio1()" onclick="hide();">Week Days
+		<input type="radio" name="group1" value="2" onchange="radio1()" onclick="show();">Special Occasions	
+		<input type="radio" name="group1" value="3" onchange="radio1()" onclick="hide();">Weekend<br><br>
+	</div>
+	<div id="date_dis" style="display: none;">
+	<?php
+		error_reporting(E_ALL ^ E_DEPRECATED);
+		mysql_connect("localhost","root","") or die(mysql_error());
+		mysql_select_db("first_db") or die("Cannor connect to server");
+		$query12=mysql_query("Select distinct date_of_occ from occasion_schedule ");
+		echo('<select name="datebuilding" onChange="allotgetDate(this.value)">');
+		echo('<option value="">Choose Date</option>');
+		while($row=mysql_fetch_array($query12))
+		{
+			$datebuild=$row['date_of_occ'];//integer type				
+			echo('<option value="'.$datebuild.'">'.$datebuild.'</option>');
+		}
+		echo('</select>');
+	?>	
+	</div>	
+	<div id="myd"></div>
 	<?php
 		error_reporting(E_ALL ^ E_DEPRECATED);
 		mysql_connect("localhost","root","") or die(mysql_error());
@@ -202,17 +265,36 @@
 		}
 		echo('</select>');		
 	?>	
+	<div id="hikuch" style="display: none;">
+	<select><option>Select One</option></select></div>
+	<div id="axbuilding1"></div>
 	<div id="allotfloorx"></div>
 	<div id="allottable"></div>
 	</div></div><br>
 
 	<div class="right"><div class="forms">
 	<h1 align="center">Allocation Display</h1>
-			<div class="check">Schedule For:		
-				<input type="radio" name="group2" id="2" onchange="radio2()" value="1"  checked>Week Days
-				<input type="radio" name="group2" id="2" onchange="radio2()" value="2" " >Special Occasions	
-				<input type="radio" name="group2" id="2" onchange="radio2()" value="3"  >Weekend<br><br>
-			</div>
+	<div class="check">Schedule For:		
+		<input type="radio" name="group2" id="2" onchange="radio2()" value="1" checked onclick="hidd();">Week Days
+		<input type="radio" name="group2" id="2" onchange="radio2()" value="2" onclick="showw();">Special Occasions	
+		<input type="radio" name="group2" id="2" onchange="radio2()" value="3"  onclick="hidd();">Weekend<br><br>
+	</div>
+	<div id="date_dis1" style="display: none;">
+	<?php
+		error_reporting(E_ALL ^ E_DEPRECATED);
+		mysql_connect("localhost","root","") or die(mysql_error());
+		mysql_select_db("first_db") or die("Cannor connect to server");
+		$query123=mysql_query("Select distinct date_of_occ from occasion_schedule ");
+		echo('<select name="datebuildingx" onChange="displaygetDate(this.value)">');
+		echo('<option value="">Choose Date</option>');
+		while($row1=mysql_fetch_array($query123))
+		{
+			$datebuild1=$row1['date_of_occ'];//integer type				
+			echo('<option value="'.$datebuild1.'">'.$datebuild1.'</option>');
+		}
+		echo('</select>');
+	?>	
+	</div>
 
 	<?php
 		error_reporting(E_ALL ^ E_DEPRECATED);
@@ -231,9 +313,10 @@
 
 		
 	?>
-		<div id="displayfloorx">
-
-		</div>
+	<div id="hikuchh" style="display: none;">
+	<select><option>Select One</option></select></div>
+	<div id="abuilding1"></div>
+	<div id="displayfloorx"></div>
 	<div id="showtable"></div>
 </div>
 </div>

@@ -74,7 +74,7 @@
 		    					if( $x==floor($x)) 	    					
 		    						$xs=$x."am";
 		    					else
-		    						$prevs=floor($prev).":30am";
+		    						$xs=floor($x).":30am";
 		    				}
 						    echo("<div class='shifts'>Shift: $prevs - $xs<br>");
 						    if ( $row["$x"]==-1)

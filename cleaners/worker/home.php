@@ -4,6 +4,25 @@
         <link href = "homework.css" type = "text/css" rel = "stylesheet"/>
         <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Raleway:100,500,600,800"/>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script type="text/javascript">
+		    var datefield=document.createElement("input")
+		    datefield.setAttribute("type", "date")
+		    if (datefield.type!="date"){ //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+		        document.write('<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />\n')
+		        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"><\/script>\n')
+		        document.write('<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"><\/script>\n') 
+		    }
+		</script>
+		 
+		<script>
+		if (datefield.type!="date"){ //if browser doesn't support input type="date", initialize date picker widget:
+		    jQuery(function($){ //on document.ready
+		        $('#dato').datepicker({
+		        	dateFormat: 'yy-mm-dd'
+		        });
+		    })
+		}
+		</script>
  	   </head>
    <?php
    session_start(); //starts the session
@@ -26,7 +45,7 @@
         	<i class="fa fa-pencil"></i>
 			<a id="sch" href="changepassword.php">Password</a>
 		</div><br><br>
-		<div class="show">
+		<div class="show left">
 		<h3 class="subh">Your schedule for today</h3>       
 	    <p id="content"><?php       
 	        error_reporting(E_ALL ^ E_DEPRECATED);
@@ -102,7 +121,7 @@
 	    				}    								    		
 	    				echo "<div class='shifts'><li>Time $as - $bs<br>";
 	    				echo "Bathroom $row[0]<br>";
-	    				echo "Building: $row[1] Floor: $row[2]<br></div><br></li>";
+	    				echo "Building: $row[1] Floor: $row[2]<br></li></div><br>";
 	    			}
 	    			$r=$r+1;
 	    		}
@@ -111,11 +130,13 @@
 	    	?>        
 	    </p>
 	    </div>
- <form action="/action_page.php">
-  Take a Leave<br>
-  Enter Date: <input type="text" name="fname"><br>
-  Enter Reason: <input type="text" name="lname"><br>
-  <input type="submit" value="Submit">
-</form> 	    
+	    <div class="right">	
+			<form action="home.php">
+				<h3>Take a Leave</h3><br>
+				Enter Date: <br><input type="date" name="fname"><br><br>
+				Enter Reason: <br><input type="text" name="lname"><br><br>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
     </body>
 </html>	

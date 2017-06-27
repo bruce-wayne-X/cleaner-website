@@ -69,7 +69,7 @@
 		    					if( $x==floor($x)) 	    					
 		    						$xs=$x."am";
 		    					else
-		    						$prevs=floor($prev).":30am";
+		    						$xs=floor($x).":30am";
 		    				}
 					    echo("<div class='shifts'>Shift: $prevs - $xs");
 						echo('<div id="a'.$x.'b'.$rowid.'c'.$prev.'"><select name="users" onclick="getState('.$rowid.','.$x.','.$prev.')" onchange="showUser(value,'.$rowid.','.$x.','.$prev.')">');
