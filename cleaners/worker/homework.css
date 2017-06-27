@@ -68,7 +68,9 @@ input[type=submit]:hover {
     clear:both;
 }
 
-.show{    
+.show{ 
+    float:left;   
+    clear:left;
     margin-left: 2em;
     margin-top: 3em;
     max-width: 30%;
@@ -76,25 +78,30 @@ input[type=submit]:hover {
     padding: 0.7em;
     padding-right: 2em;
     border-radius: 10px;    
-    box-shadow:0 8px 10px 0 rgba(0,0,0,.20),0 8px 10px 0 rgba(0,0,0,.19);    
+    box-shadow:0 8px 10px 0 rgba(0,0,0,.20),0 8px 10px 0 rgba(0,0,0,.19);   
+    margin-bottom: 2em;    
 }
 
-.logout{
+.logout{    
     min-height: 3em;
     width: 7.5em;
     position: relative;
     text-align: center;
     color: white;    
     background:rgba(40,57,101,.9);
-    margin-right: 2em;  
+    margin-right: 2em;
     float: right;
     vertical-align: middle;
     line-height: 2.9em;    
     border-radius: 25px;
     box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
 }
+
 #log{
-    color:white;
+    color:white;    
+}
+a{
+    text-decoration: none;
 }
 #newsh{
     min-height: 3em;
@@ -140,8 +147,13 @@ ul {
     background:rgba(255,255,255,1);
     width:90%;
     padding: 0.7em;
-    border-radius: 10px;    
+    border-radius: 10px;  
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;  
 }
 h3{
     text-align: center;
+}
+.right h3{    
 }
