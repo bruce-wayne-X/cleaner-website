@@ -60,7 +60,7 @@
 
 			        xmlhttp.send();
 			    }
-		function displaygetBuilding(building)
+		function displaygetBuilding1(building,date)
 		{
 		        if (window.XMLHttpRequest) {
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -74,7 +74,7 @@
 		                document.getElementById('displayfloorx').innerHTML = this.responseText;
 		            }
 		        };
-		        xmlhttp.open("GET","displayfindbuilding.php?id="+qwert()+"&building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.open("GET","displayfindbuilding1.php?id="+qwert()+"&building="+building+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 		}
 		function displaygetDate(date)
@@ -111,6 +111,23 @@
 		            }
 		        };
 		        xmlhttp.open("GET","allotfinddate.php?id="+qwer()+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
+		function allotgetBuilding1(building,date)
+		{
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('allotfloorx').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","allotfindbuilding1.php?id="+qwer()+"&building="+building+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 		}
 		function allotgetBuilding(building)
@@ -150,6 +167,26 @@
 		        xmlhttp.send();
 				
 		}
+		function allotgetfloor1(floor,building,date)
+		{
+		        //window.alert(5 + 8);	
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('allottable').innerHTML = this.responseText;
+		            }
+		        };
+		        //window.alert(5 + 8);
+		        xmlhttp.open("GET","allottable1.php?id="+qwer()+"&building="+building+"&floor="+floor+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+				
+		}
 
 
 		function displaygetfloor(floor,building)
@@ -169,6 +206,26 @@
 		        };
 		        //window.alert(5 + 8);
 		        xmlhttp.open("GET","showtable.php?id="+qwert()+"&building="+building+"&floor="+floor,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+				
+		}
+		function displaygetfloor1(floor,building,date)
+		{
+		        //window.alert(5 + 8);
+		        if (window.XMLHttpRequest) {		        	
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('showtable').innerHTML = this.responseText;
+		            }
+		        };
+		        //window.alert(5 + 8);
+		        xmlhttp.open("GET","showtable1.php?id="+qwert()+"&building="+building+"&floor="+floor+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 				
 		}
@@ -270,7 +327,7 @@
 	<div id="axbuilding1"></div>
 	<div id="allotfloorx"></div>
 	<div id="allottable"></div>
-	</div></div><br>
+	</div></div>
 
 	<div class="right"><div class="forms">
 	<h1 align="center">Allocation Display</h1>

@@ -20,7 +20,7 @@
 	}
 	else {
 		$rwid=0;		
-		echo'<select name="buildx" onChange="allotgetBuilding(this.value)">';
+		echo'<select name="buildx" onChange="allotgetBuilding1(this.value,\''.$date.'\')">';
 		echo("<option value=''>Select One</option>");	
 			while ($row=mysql_fetch_array($result)) { 
 				$rwid=$row['building'];
