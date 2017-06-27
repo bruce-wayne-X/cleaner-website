@@ -77,6 +77,23 @@
 		        xmlhttp.open("GET","displayfindbuilding1.php?id="+qwert()+"&building="+building+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 		}
+		function displaygetBuilding(building)
+		{
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('displayfloorx').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","displayfindbuilding1.php?id="+qwert()+"&building="+building+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
 		function displaygetDate(date)
 		{		
 				document.getElementById('hikuchh').style.display = 'none';
