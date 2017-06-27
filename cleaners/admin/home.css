@@ -215,7 +215,9 @@ input[type="radio"]:checked:before {
   background    : #fff;
   margin-bottom: 2em;
 }
-
+a{
+    text-decoration: none;
+}
 .tabbed > input:checked + section > h1{
   position : relative;
   z-index  : 2;
