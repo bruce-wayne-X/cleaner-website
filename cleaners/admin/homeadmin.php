@@ -291,13 +291,13 @@
 		<div class="submits">
 		<?php
 			error_reporting(E_ALL ^ E_DEPRECATED);
-			mysql_connect("localhost","root","") or die(mysql_error());
-			mysql_select_db("first_db") or die("Cannor connect to server");
-			$query=mysql_query("SELECT distinct building FROM bathschedule order by building asc");
+			$con1=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+			//mysqli_select_db("first_db") or die("Cannor connect to server");
+			$query=mysqli_query($con1,"SELECT distinct building FROM bathschedule order by building asc");
 			echo('<label for="building">Choose Building</label>');
 			echo('<select name="building" id="building" onChange="getBuilding(value)">');
 			echo('<option value="">Select One</option>');
-			while($row=mysql_fetch_array($query))
+			while($row=mysqli_fetch_array($query))
 			{
 				$rowbuilding=$row['building'];//integer type				
 				echo('<option value="'.$rowbuilding.'">'.$rowbuilding.'</option>');
@@ -330,13 +330,13 @@
 
 		<div class="selects">
 		<?php
-			mysql_connect("localhost","root","") or die(mysql_error());
-			mysql_select_db("first_db") or die("Cannor connect to server");
-			$query=mysql_query("SELECT scheduleno FROM schedulelist order by scheduleno asc");
+			$con2=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+			//mysqli_select_db($con2,"first_db") or die("Cannor connect to server");
+			$query=mysqli_query($con2,"SELECT scheduleno FROM schedulelist order by scheduleno asc");
 			echo('<label for="sche">Select from existing schedules</labe>'); 
 			echo('<select name="sno" id="sche" required="required">');
 			echo('<option disable selected value >Select One</option>');
-			while($row=mysql_fetch_array($query))
+			while($row=mysqli_fetch_array($query))
 			{
 				$scheduleno=$row['scheduleno'];//integer type				
 				echo('<option value="'.$scheduleno.'">'.$scheduleno.'</option>');					
@@ -357,13 +357,13 @@
 			<div class="selects">
 				<?php
 					error_reporting(E_ALL ^ E_DEPRECATED);
-					mysql_connect("localhost","root","") or die(mysql_error());
-					mysql_select_db("first_db") or die("Cannor connect to server");
-					$query=mysql_query("SELECT distinct building FROM bathschedule order by building asc");
+					$con3=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+					
+					$query=mysqli_query($con3,"SELECT distinct building FROM bathschedule order by building asc");
 					echo('<label for="build">Choose Building</label>');
 					echo('<select name="xbuilding" id="build" onChange="getBuildingx(value)">');
 					echo('<option value="">Select One</option>');
-					while($row=mysql_fetch_array($query))
+					while($row=mysqli_fetch_array($query))
 					{
 						$rowbuilding=$row['building'];//integer type				
 						echo('<option value="'.$rowbuilding.'">'.$rowbuilding.'</option>');
@@ -393,13 +393,12 @@
 		
 		
 			<?php
-				mysql_connect("localhost","root","") or die(mysql_error());
-				mysql_select_db("first_db") or die("Cannor connect to server");
-				$query=mysql_query("SELECT scheduleno FROM schedulelist order by scheduleno asc");
+				$con4= mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+				$query=mysqli_query($con4,"SELECT scheduleno FROM schedulelist order by scheduleno asc");
 				echo('<label for="sched">Choose From existing Schedule</label>');
 				echo('<select name="xsno" required="required" id="sched">');
 				echo('<option disable selected value >Select One</option>');
-				while($row=mysql_fetch_array($query))
+				while($row=mysqli_fetch_array($query))
 				{
 					$scheduleno=$row['scheduleno'];//integer type				
 					echo('<option value="'.$scheduleno.'">'.$scheduleno.'</option>');					
@@ -421,12 +420,11 @@
 	<h1 align="center" id="faltu">Schedule Display </h1>
 	<div class="show">
 	<?php
-		mysql_connect("localhost","root","") or die(mysql_error());
-		mysql_select_db("first_db") or die("Cannor connect to server");
-		$query=mysql_query("SELECT distinct building FROM bathschedule order by building asc");
+		$con5=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+		$query=mysqli_query($con5,"SELECT distinct building FROM bathschedule order by building asc");
 		echo('<select name="building" onChange="displaygetBuilding(value)">');
 		echo('<option value="">Choose New</option>');
-		while($row=mysql_fetch_array($query))
+		while($row=mysqli_fetch_array($query))
 		{
 			$rowbuilding=$row['building'];//integer type				
 			echo('<option value="'.$rowbuilding.'">'.$rowbuilding.'</option>');
@@ -445,10 +443,10 @@
         <div>
 		<ul class="ulist">
 		<?php
-			mysql_connect("localhost","root","") or die(mysql_error());
-			mysql_select_db("first_db") or die("Cannor connect to server");
-			$query=mysql_query("Select * from bathschedule ");
-			while($row=mysql_fetch_array($query))
+			$con6= mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+			
+			$query=mysqli_query($con6,"Select * from bathschedule ");
+			while($row=mysqli_fetch_array($query))
 			{
 				$rowid=$row['id'];//integer type
 				$rowb=$row['building'];
@@ -524,10 +522,10 @@
 
         <div>
         <?php
-		$query1=mysql_query("Select distinct date_of_occ from occasion_schedule ");
+		$query1=mysqli_query($con6,"Select distinct date_of_occ from occasion_schedule ");
 		echo('<select name="datebuilding" onChange="datedisplayer(this.value)">');
 		echo('<option value="">Choose</option>');
-		while($row=mysql_fetch_array($query1))
+		while($row=mysqli_fetch_array($query1))
 		{
 			$datebuild=$row['date_of_occ'];//integer type				
 			echo('<option value="'.$datebuild.'">'.$datebuild.'</option>');
@@ -537,10 +535,10 @@
 		<div id="datedisplayer">
 		<ul class="ulist">
 		<?php
-			mysql_connect("localhost","root","") or die(mysql_error());
-			mysql_select_db("first_db") or die("Cannor connect to server");
-			$query=mysql_query("Select * from occasion_schedule ");
-			while($row=mysql_fetch_array($query))
+			$con7=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+			
+			$query=mysqli_query($con7,"Select * from occasion_schedule ");
+			while($row=mysqli_fetch_array($query))
 			{
 				$rowid=$row['id'];//integer type
 				$rowb=$row['building'];
@@ -622,10 +620,9 @@
         <div>
           <ul class="ulist">
 		<?php
-			mysql_connect("localhost","root","") or die(mysql_error());
-			mysql_select_db("first_db") or die("Cannor connect to server");
-			$query=mysql_query("Select * from bathschedule1 ");
-			while($row=mysql_fetch_array($query))
+			$con8=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+			$query=mysqli_query($con8,"Select * from bathschedule1 ");
+			while($row=mysqli_fetch_array($query))
 			{
 				$rowid=$row['id'];//integer type
 				$rowb=$row['building'];

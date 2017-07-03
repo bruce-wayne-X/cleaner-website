@@ -29,14 +29,13 @@
 		<div class="show">
 		<p id="content"><?php       
 	        error_reporting(E_ALL ^ E_DEPRECATED);
-	        mysql_connect("localhost", "root", "") or die (mysql_error()); //Connect to server
-	    	mysql_select_db("first_db") or die ("Cannot connect to database"); //Connect to database
-	    	$pid = mysql_query("Select * from cleaners WHERE name='$user'"); // Query the users table	    	
-	    	$ppid =mysql_fetch_assoc($pid);
+	        mysqli_connect("localhost", "root", "","first_db") or die (mysqli_error()); //Connect to server
+	    	$pid = mysqli_query($con1,"Select * from cleaners WHERE name='$user'"); // Query the users table	    	
+	    	$ppid =mysqli_fetch_assoc($pid);
 	    	$id=$ppid['id'];	    	
 	    	$col=5;	 
-	    	$query1 = mysql_query("Select * from bathschedule");   	
-	    	$rows=mysql_num_rows($query1);	    	
+	    	$query1 = mysqli_query($con1,"Select * from bathschedule");   	
+	    	$rows=mysqli_num_rows($query1);	    	
 	    	?>        
 	    </p>
 	    </div>

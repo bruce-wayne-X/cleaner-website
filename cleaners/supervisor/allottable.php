@@ -6,16 +6,15 @@
 		$floor=(string)($_GET['floor']);
 		echo "<ul>";
 		error_reporting(E_ALL ^ E_DEPRECATED);
-		mysql_connect("localhost","root","") or die(mysql_error());
-		mysql_select_db("first_db") or die("Cannor connect to server");
+		$con1=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
 		if($id==1)
-			$query=mysql_query("Select * from bathschedule where building='$building' and floor = '$floor' ");
+			$query=mysqli_query($con1,"Select * from bathschedule where building='$building' and floor = '$floor' ");
 		else if($id==2)
-			$query=mysql_query("Select * from occasion_schedule where building='$building' and floor = '$floor' ");
+			$query=mysqli_query($con1,"Select * from occasion_schedule where building='$building' and floor = '$floor' ");
 		else if($id==3)
-			$query=mysql_query("Select * from bathschedule1 where building='$building' and floor = '$floor' ");
+			$query=mysqli_query($con1,"Select * from bathschedule1 where building='$building' and floor = '$floor' ");
 		
-		while($row=mysql_fetch_array($query))
+		while($row=mysqli_fetch_array($query))
 		{
 
 			$rowid=$row['id'];//integer type

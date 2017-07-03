@@ -11,10 +11,9 @@
 		$floor=(string)($_GET['floor']);
 		echo('<ul>');
 		error_reporting(E_ALL ^ E_DEPRECATED);
-		mysql_connect("localhost","root","") or die(mysql_error());
-		mysql_select_db("first_db") or die("Cannor connect to server");
-		$query=mysql_query("Select * from bathschedule where building='$building' and floor = '$floor' ");
-		while($row=mysql_fetch_array($query))
+		$con1=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+		$query=mysqli_query($con1,"Select * from bathschedule where building='$building' and floor = '$floor' ");
+		while($row=mysqli_fetch_array($query))
 		{
 			$rowid=$row['id'];//integer type
 			$rowb=$row['building'];
@@ -96,12 +95,11 @@
 		$building=(string)($_GET['building']);
 		$floor=(string)($_GET['floor']);		
 		error_reporting(E_ALL ^ E_DEPRECATED);
-		mysql_connect("localhost","root","") or die(mysql_error());
-		mysql_select_db("first_db") or die("Cannor connect to server");
-		$query1=mysql_query("Select distinct date_of_occ from occasion_schedule where building='$building' and floor = '$floor' ");
+		$con2=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+		$query1=mysqli_query($con2,"Select distinct date_of_occ from occasion_schedule where building='$building' and floor = '$floor' ");
 		echo('<select name="datebuilding" onChange="datedisplay(\''.$building.'\',\''.$floor.'\',this.value)">');
 		echo('<option value="">Choose</option>');
-		while($row=mysql_fetch_array($query1))
+		while($row=mysqli_fetch_array($query1))
 		{
 			$datebuild=$row['date_of_occ'];//integer type				
 			echo('<option value="'.$datebuild.'">'.$datebuild.'</option>');
@@ -109,8 +107,8 @@
 		echo('</select>');
 		echo('<div id="datedisplayer"> ');
 		echo('<ul class="ulist">');
-		$query=mysql_query("Select * from occasion_schedule where building='$building' and floor = '$floor' ");
-		while($row=mysql_fetch_array($query))
+		$query=mysqli_query($con2,"Select * from occasion_schedule where building='$building' and floor = '$floor' ");
+		while($row=mysqli_fetch_array($query))
 		{
 			$rowid=$row['id'];//integer type
 			$rowb=$row['building'];
@@ -195,10 +193,9 @@
 		$building=(string)($_GET['building']);
 		$floor=(string)($_GET['floor']);	
 		error_reporting(E_ALL ^ E_DEPRECATED);
-		mysql_connect("localhost","root","") or die(mysql_error());
-		mysql_select_db("first_db") or die("Cannor connect to server");
-		$query=mysql_query("Select * from bathschedule1 where building='$building' and floor = '$floor' ");
-		while($row=mysql_fetch_array($query))
+		$con3=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
+		$query=mysqli_query($con3,"Select * from bathschedule1 where building='$building' and floor = '$floor' ");
+		while($row=mysqli_fetch_array($query))
 		{
 			$rowid=$row['id'];//integer type
 			$rowb=$row['building'];

@@ -49,14 +49,13 @@
 		<h3 class="subh">Your schedule for today</h3>       
 	    <p id="content"><?php       
 	        error_reporting(E_ALL ^ E_DEPRECATED);
-	        mysql_connect("localhost", "root", "") or die (mysql_error()); //Connect to server
-	    	mysql_select_db("first_db") or die ("Cannot connect to database"); //Connect to database
-	    	$pid = mysql_query("Select * from cleaners WHERE name='$user'"); // Query the users table	    	
-	    	$ppid =mysql_fetch_assoc($pid);
+	        $con1=mysqli_connect("localhost", "root", "","first_db") or die (mysqli_error()); //Connect to server
+	    	$pid = mysqli_query($con1,"Select * from cleaners WHERE name='$user'"); // Query the users table	    	
+	    	$ppid =mysqli_fetch_assoc($pid);
 	    	$id=$ppid['id'];	    	
 	    	$col=5;	 
-	    	$query1 = mysql_query("Select * from bathschedule");   	
-	    	$rows=mysql_num_rows($query1);	    	
+	    	$query1 = mysqli_query($con1,"Select * from bathschedule");   	
+	    	$rows=mysqli_num_rows($query1);	    	
 	    	$visit = array(); // array of columns
 			for($col=0; $col<29; $col++)
 			{
@@ -71,8 +70,8 @@
 	    	for ($col=5;$col<29;$col=$col+1)
 	    	{
 	    		$r=0;
-	    		$query = mysql_query("Select * from bathschedule");
-	    		while($row = mysql_fetch_row($query))
+	    		$query = mysqli_query($con1,"Select * from bathschedule");
+	    		while($row = mysqli_fetch_row($query))
 	    		{
 	    			if (($row[$col]==$id)&&($visit[$col][$r]==0))
 	    			{

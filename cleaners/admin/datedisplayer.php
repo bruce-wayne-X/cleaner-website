@@ -4,20 +4,14 @@
 		$floor=(string)($_GET['floor']);
 		$date=(string)($_GET['date']);
 		error_reporting(E_ALL ^ E_DEPRECATED);
-		mysql_connect("localhost","root","") or die(mysql_error());
-		mysql_select_db("first_db") or die("Cannor connect to server");
-		
+		$con1=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
 		echo('<ul class="ulist">');
 		//echo($date);
-		$query=mysql_query("Select * from occasion_schedule where building='$building' and floor = '$floor' and date_of_occ='$date'");
-		while($row=mysql_fetch_array($query))
+		$query=mysqli_query($con1,"Select * from occasion_schedule where building='$building' and floor = '$floor' and date_of_occ='$date'");
+		while($row=mysqli_fetch_array($query))
 		{
 			$rowid=$row['id'];//integer type
-			$rowb=$row['building'];
-			$rowf=$row['floor'];
 			echo('<li class="list">');
-			echo "Building: $rowb<br>";
-			echo "Floor: $rowf<br>";
 			echo("Bathroom: $rowid</br>");
 		$x=0;//float type?
 		$y=0;//arity:P

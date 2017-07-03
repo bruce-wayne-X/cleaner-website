@@ -7,10 +7,9 @@
 	}
 	if($_SERVER['REQUEST_METHOD'] == "GET")
 	{
-		mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
-		mysql_select_db("first_db") or die("Cannot connect to database"); //Connect to database
+		$con1=mysql_connect("localhost", "root","","first_db") or die(mysqli_error()); //Connect to server
 		$id = $_GET['id'];
-		mysql_query("DELETE FROM bathrooms WHERE id='$id'");
+		mysqli_query($con1,"DELETE FROM bathrooms WHERE id='$id'");
 		header("location: home.php");
 	}
 ?>
