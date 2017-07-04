@@ -226,3 +226,73 @@ a{
 .tabbed > input:not(:checked) + section > div{
   display : none;
 }
+.showw{
+    margin-left: 2em;
+    margin-right: 2em;
+    margin-top: 3em;
+    max-width: 93%;
+    background:rgba(255,255,255,0.7);    
+    padding: 0.7em;
+    border-radius: 10px;    
+    box-shadow:0 8px 10px 0 rgba(0,0,0,.20),0 8px 10px 0 rgba(0,0,0,.19);    
+    overflow:auto;    
+}
+
+#buildpro{    
+    width:98%;
+}
+.fl{    
+    clear: both;    
+}
+.foo {
+    display: inline-block;
+    vertical-align:top;
+    white-space:normal;
+    float: left;
+    width: 237px;
+    height: 30px;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .3);
+    border-radius: 5px;
+    padding: 2px;
+}
+.small{
+    float: left;
+    box-sizing: border-box;      
+    height: 30px;
+    background: black;
+    margin: 0px;
+    border: 1px solid rgba(255,255,255,1);
+     position: relative;
+    display: inline-block;
+}
+.dropbtn {            
+    cursor: pointer;
+    color: none;
+    opacity:0;
+}
+.dropdown-content {    
+    display: none;
+    position: absolute;
+    bottom:10px;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-content p {
+    font-size: 11px;
+    color: black;
+    padding: 0px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content p:hover {
+    background-color: #f1f1f1;
+}
+.small:hover .dropdown-content {
+    display: block;
+}
+.small:hover .dropbtn {
+    background-color: #3e8e41;
+}
