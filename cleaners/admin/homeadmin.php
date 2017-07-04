@@ -257,7 +257,23 @@
 		        xmlhttp.send();
 				
 		}		
-
+		function attendance(building)
+		{
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('attend').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","attendance.php?building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
 		function show() { document.getElementById('date').style.display = 'block'; }
 		function asdx(date){window.alert(date);}
         function hide() { document.getElementById('date').style.display = 'none'; }
@@ -284,6 +300,25 @@
         <i class="fa fa-plus"></i>
 		<a id="sch" href="add_schedule.php">Schedule</a>
 	</div><br><br>		
+	<div class="showw">
+		<h3>Today's Progress</h3>
+		<?php
+			error_reporting(E_ALL ^ E_DEPRECATED);
+			mysql_connect("localhost","root","") or die(mysql_error());
+			mysql_select_db("first_db") or die("Cannor connect to server");
+			$query=mysql_query("SELECT distinct building FROM attendance order by building asc");
+			echo('<label>Choose Building</label><br>');
+			echo('<select id="buildpro" onChange="attendance(value)">');
+			echo('<option value="">Select One</option>');
+			while($row=mysql_fetch_array($query))
+			{
+				$rowbuilding=$row['building'];//integer type				
+				echo('<option value="'.$rowbuilding.'">'.$rowbuilding.'</option>');
+			}
+			echo('</select>');		
+		?>
+		<div id="attend"></div>
+	</div><br>
 	<div class="left">
 	<div class="forms">	
 	<h3 class="tags">Add New Bathroom</h3>
@@ -595,8 +630,7 @@
 		    				}		    	
 		    				else{
 		    					if( $x==floor($x)){ 	    					
-		    						$xs=$x."am";
-		    						echo "true";
+		    						$xs=$x."am";		    						
 		    					}
 		    					else
 		    						$xs=floor($x).":30am";

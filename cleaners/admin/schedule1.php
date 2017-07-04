@@ -18,13 +18,17 @@
 	  	$userq=$_SESSION['user'];
 	  	if ($row['scheduleno']!=0)
 	  	{
-	  		mysql_query("INSERT INTO schedulelist (`$start`,`$end`) VALUES (-1,-1)");	
+	  		mysql_query("INSERT INTO schedulelist (`$start`,`$end`,shifts) VALUES (-1,-1,1)");	
 	  		header("location: add_schedule.php"); 	  		
 	  	}
 	  	else 
 	  	{
 	  		mysql_query("update schedulelist set `$start` = -1 where scheduleno = 0 ");
-	  		mysql_query("update schedulelist set `$end` = -1 where scheduleno = 0 ");	  		
+	  		mysql_query("update schedulelist set `$end` = -1 where scheduleno = 0 ");
+	  		$query1 = mysql_query("Select shifts from schedulelist where scheduleno = 0");
+	  		$row1=mysql_fetch_array($query1);
+	  		$a= $row1['shifts']+1;
+	  		mysql_query("update schedulelist set shifts = '$a' where scheduleno = 0 ");	  		
 	  		header("Location: add_schedule.php"); 	
 	  	}	  	
 	}
