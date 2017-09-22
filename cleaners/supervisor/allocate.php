@@ -1,12 +1,34 @@
 <?php
-   session_start(); //starts the session
-   if($_SESSION['user']){ // checks if the user is logged in  
-   }
-   else{
-      header("location: ../index.php"); // redirects if user is not logged in
-   }
-   $user = $_SESSION['user']; //assigns user value
-   ?>
+	session_start(); //starts the session
+	date_default_timezone_set("Asia/Kolkata");
+	if($_SESSION['user']){ // checks if the user is logged in  
+	}
+	else{
+		header("location: ../index.php"); // redirects if user is not logged in
+	}
+	$user = $_SESSION['user']; //assigns user value   
+	error_reporting(E_ALL ^ E_DEPRECATED);
+	mysql_connect("localhost","root","") or die(mysql_error());
+	mysql_select_db("first_db") or die("Cannor connect to server");
+	$today = date('Y-m-d');
+	$date_query=mysql_query("SELECT * FROM attendance where datee = '$today'");
+	$date_result = mysql_fetch_array($date_query);
+	$norow = mysql_num_rows($date_query);
+	//echo(  date('l') );
+	if($norow==0){		
+		if(date('l')=="Saturday"||date('l')=="Sunday"){
+			//copy from bathschedule1			
+			mysql_query("INSERT INTO attendance (id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`,`datee`) 
+				select id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`, '$today' from bathschedule1") ;
+			//mysql_query("UPDATE attendance SET datee = '$today' where datee = '0000-00-00'");
+		}
+		else{
+			mysql_query("INSERT INTO attendance (id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`,`datee`) 
+				select id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`, '$today' from bathschedule") ;			
+			//mysql_query("UPDATE attendance SET datee = '$today' where datee = '0000-00-00'");
+		}					
+	}
+?>
 <!doctype html>
 <html>
     <head>
@@ -97,6 +119,7 @@
 		function displaygetDate(date)
 		{		
 				document.getElementById('hikuchh').style.display = 'none';
+				document.getElementById('abuilding1').style.display = 'block';		
 		        if (window.XMLHttpRequest) {
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
 		            xmlhttp = new XMLHttpRequest();
@@ -114,7 +137,8 @@
 		}
 		function allotgetDate(date)
 		{		
-				document.getElementById('hikuch').style.display = 'none';		
+				document.getElementById('hikuch').style.display = 'none';
+				document.getElementById('axbuilding1').style.display = 'block';		
 		        if (window.XMLHttpRequest) {
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
 		            xmlhttp = new XMLHttpRequest();
@@ -162,6 +186,23 @@
 		            }
 		        };
 		        xmlhttp.open("GET","allotfindbuilding.php?id="+qwer()+"&building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
+		function attendance(building)
+		{
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('attend').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","attendance.php?building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 		}
 		function allotgetfloor(floor,building)
@@ -263,12 +304,14 @@
             document.getElementById('displayfloorx').innerHTML = "";
             document.getElementById('showtable').innerHTML = "";
             document.getElementById("abuilding").selectedIndex=0;
+            document.getElementById("date_dis1x").selectedIndex=0;
 		}
 		function radio1()
 		{
             document.getElementById('allotfloorx').innerHTML = "";
             document.getElementById('allottable').innerHTML = "";			
             document.getElementById("axbuilding").selectedIndex=0;
+            document.getElementById("date_disx").selectedIndex=0;
 		}
 		function show() { 
 			document.getElementById('date_dis').style.display = 'block';
@@ -276,6 +319,9 @@
 			document.getElementById('hikuch').style.display = 'block';
 		}
 		function hide() { document.getElementById('date_dis').style.display = 'none'; 
+			document.getElementById('hikuch').style.display = 'none';
+			document.getElementById('axbuilding1').style.display = 'none';
+			document.getElementById('axbuilding').style.display = 'block';
 		}
 		function showw() { 
 			document.getElementById('date_dis1').style.display = 'block';
@@ -283,6 +329,9 @@
 			document.getElementById('hikuchh').style.display = 'block';
 		}
 		function hidd() { document.getElementById('date_dis1').style.display = 'none'; 
+			document.getElementById('hikuchh').style.display = 'none';
+			document.getElementById('abuilding1').style.display = 'none';
+			document.getElementById('abuilding').style.display = 'block';
 		}	    		
 		</script>
     </head>
@@ -297,8 +346,26 @@
         <div id="newsh">
         <i class="fa fa-plus"></i>
 		<a id="sch" href="addworker.php">Worker</a>
-	</div><br><br>		    
-	
+	</div><br><br>	
+	<div class="show">
+		<h3>Today's Progress</h3>
+		<?php
+			error_reporting(E_ALL ^ E_DEPRECATED);
+			mysql_connect("localhost","root","") or die(mysql_error());
+			mysql_select_db("first_db") or die("Cannor connect to server");
+			$query=mysql_query("SELECT distinct building FROM attendance order by building asc");
+			echo('<label>Choose Building</label><br>');
+			echo('<select id="buildpro" onChange="attendance(value)">');
+			echo('<option value="">Select One</option>');
+			while($row=mysql_fetch_array($query))
+			{
+				$rowbuilding=$row['building'];//integer type				
+				echo('<option value="'.$rowbuilding.'">'.$rowbuilding.'</option>');
+			}
+			echo('</select>');		
+		?>
+		<div id="attend"></div>
+	</div><br>
 	<div class="left"><div class="forms">
 	<h1 align="center">Allocation </h1>
 
@@ -313,7 +380,7 @@
 		mysql_connect("localhost","root","") or die(mysql_error());
 		mysql_select_db("first_db") or die("Cannor connect to server");
 		$query12=mysql_query("Select distinct date_of_occ from occasion_schedule ");
-		echo('<select name="datebuilding" onChange="allotgetDate(this.value)">');
+		echo('<select id = "date_disx"name="datebuilding" onChange="allotgetDate(this.value)">');
 		echo('<option value="">Choose Date</option>');
 		while($row=mysql_fetch_array($query12))
 		{
@@ -351,7 +418,7 @@
 	<div class="check">Schedule For:		
 		<input type="radio" name="group2" id="2" onchange="radio2()" value="1" checked onclick="hidd();">Week Days
 		<input type="radio" name="group2" id="2" onchange="radio2()" value="2" onclick="showw();">Special Occasions	
-		<input type="radio" name="group2" id="2" onchange="radio2()" value="3"  onclick="hidd();">Weekend<br><br>
+		<input type="radio" name="group2" id="2" onchange="radio2()" value="3" onclick="hidd();">Weekend<br><br>
 	</div>
 	<div id="date_dis1" style="display: none;">
 	<?php
@@ -359,7 +426,7 @@
 		mysql_connect("localhost","root","") or die(mysql_error());
 		mysql_select_db("first_db") or die("Cannor connect to server");
 		$query123=mysql_query("Select distinct date_of_occ from occasion_schedule ");
-		echo('<select name="datebuildingx" onChange="displaygetDate(this.value)">');
+		echo('<select id="date_dis1x" name="datebuildingx" onChange="displaygetDate(this.value)">');
 		echo('<option value="">Choose Date</option>');
 		while($row1=mysql_fetch_array($query123))
 		{
@@ -393,7 +460,6 @@
 	<div id="displayfloorx"></div>
 	<div id="showtable"></div>
 </div>
-</div>
-
+</div><br>
 </body>
 </html>	
