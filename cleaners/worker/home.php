@@ -1,3 +1,34 @@
+<?php
+	session_start(); //starts the session
+	date_default_timezone_set("Asia/Kolkata");
+	if($_SESSION['user']){ // checks if the user is logged in  
+	}
+	else{
+		header("location: ../index.php"); // redirects if user is not logged in
+	}
+	$user = $_SESSION['user']; //assigns user value   
+	error_reporting(E_ALL ^ E_DEPRECATED);
+	mysql_connect("localhost","root","") or die(mysql_error());
+	mysql_select_db("first_db") or die("Cannor connect to server");
+	$today = date('Y-m-d');
+	$date_query=mysql_query("SELECT * FROM attendance where datee = '$today'");
+	$date_result = mysql_fetch_array($date_query);
+	$norow = mysql_num_rows($date_query);
+	//echo(  date('l') );
+	if($norow==0){		
+		if(date('l')=="Saturday"||date('l')=="Sunday"){
+			//copy from bathschedule1			
+			mysql_query("INSERT INTO attendance (id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`,`datee`) 
+				select id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`, '$today' from bathschedule1") ;
+			//mysql_query("UPDATE attendance SET datee = '$today' where datee = '0000-00-00'");
+		}
+		else{
+			mysql_query("INSERT INTO attendance (id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`,`datee`) 
+				select id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`, '$today' from bathschedule") ;			
+			//mysql_query("UPDATE attendance SET datee = '$today' where datee = '0000-00-00'");
+		}				
+	}
+?>
 <html>
     <head>
         <title>My first PHP Website</title>
@@ -23,16 +54,7 @@
 		    })
 		}
 		</script>
- 	   </head>
-   <?php
-   session_start(); //starts the session
-   if($_SESSION['user']){ // checks if the user is logged in  	
-   }
-   else{
-      header("location: ../index.php"); // redirects if user is not logged in
-   }
-   $user = $_SESSION['user']; //assigns user value   
-   ?>
+ 	   </head>   
     <body>
         <h2 id="title">Home Page</h2>
         <p id = "greet">Hello <?php Print " $user"?>!</p> <!--Display's user name-->
@@ -117,7 +139,7 @@
 	    					if( $b==floor($b)) 	    					
 	    						$bs=$b."am";
 	    					else
-	    						$as=floor($a).":30am";
+	    						$bs=floor($b).":30am";
 	    				}    								    		
 	    				echo "<div class='shifts'><li>Time $as - $bs<br>";
 	    				echo "Bathroom $row[0]<br>";

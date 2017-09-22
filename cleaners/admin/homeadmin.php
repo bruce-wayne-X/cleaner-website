@@ -1,12 +1,34 @@
-   <?php
-   session_start(); //starts the session
-   if($_SESSION['user']){ // checks if the user is logged in  
-   }
-   else{
-      header("location: ../index.php"); // redirects if user is not logged in
-   }
-   $user = $_SESSION['user']; //assigns user value
-   ?>
+<?php
+	session_start(); //starts the session
+	date_default_timezone_set("Asia/Kolkata");
+	if($_SESSION['user']){ // checks if the user is logged in  
+	}
+	else{
+		header("location: ../index.php"); // redirects if user is not logged in
+	}
+	$user = $_SESSION['user']; //assigns user value   
+	error_reporting(E_ALL ^ E_DEPRECATED);
+	mysql_connect("localhost","root","") or die(mysql_error());
+	mysql_select_db("first_db") or die("Cannor connect to server");
+	$today = date('Y-m-d');
+	$date_query=mysql_query("SELECT * FROM attendance where datee = '$today'");
+	$date_result = mysql_fetch_array($date_query);
+	$norow = mysql_num_rows($date_query);
+	//echo(  date('l') );
+	if($norow==0){		
+		if(date('l')=="Saturday"||date('l')=="Sunday"){
+			//copy from bathschedule1			
+			mysql_query("INSERT INTO attendance (id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`,`datee`) 
+				select id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`, '$today' from bathschedule1") ;
+			//mysql_query("UPDATE attendance SET datee = '$today' where datee = '0000-00-00'");
+		}
+		else{
+			mysql_query("INSERT INTO attendance (id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`,`datee`) 
+				select id,`building`, floor,`scheduleno`,`9`,`9.5`,`10`,`10.5`,`11`,`11.5`,`12`,`12.5`,`13`,`13.5`,`14`,`14.5`,`15`,`15.5`,`16`,`16.5`,`17`,`17.5`,`18`,`18.5`,`19`,`19.5`,`20`,`20.5`, '$today' from bathschedule") ;			
+			//mysql_query("UPDATE attendance SET datee = '$today' where datee = '0000-00-00'");
+		}				
+	}
+?>
 
 <html>
     <head>
@@ -257,7 +279,23 @@
 		        xmlhttp.send();
 				
 		}		
-
+		function attendance(building)
+		{
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('attend').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","attendance.php?building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
 		function show() { document.getElementById('date').style.display = 'block'; }
 		function asdx(date){window.alert(date);}
         function hide() { document.getElementById('date').style.display = 'none'; }
@@ -284,6 +322,25 @@
         <i class="fa fa-plus"></i>
 		<a id="sch" href="add_schedule.php">Schedule</a>
 	</div><br><br>		
+	<div class="showw">
+		<h3>Today's Progress</h3>
+		<?php
+			error_reporting(E_ALL ^ E_DEPRECATED);
+			mysql_connect("localhost","root","") or die(mysql_error());
+			mysql_select_db("first_db") or die("Cannor connect to server");
+			$query=mysql_query("SELECT distinct building FROM attendance order by building asc");
+			echo('<label>Choose Building</label><br>');
+			echo('<select id="buildpro" onChange="attendance(value)">');
+			echo('<option value="">Select One</option>');
+			while($row=mysql_fetch_array($query))
+			{
+				$rowbuilding=$row['building'];//integer type				
+				echo('<option value="'.$rowbuilding.'">'.$rowbuilding.'</option>');
+			}
+			echo('</select>');		
+		?>
+		<div id="attend"></div>
+	</div><br>
 	<div class="left">
 	<div class="forms">	
 	<h3 class="tags">Add New Bathroom</h3>
@@ -595,8 +652,7 @@
 		    				}		    	
 		    				else{
 		    					if( $x==floor($x)){ 	    					
-		    						$xs=$x."am";
-		    						echo "true";
+		    						$xs=$x."am";		    						
 		    					}
 		    					else
 		    						$xs=floor($x).":30am";
