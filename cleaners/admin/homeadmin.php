@@ -595,8 +595,7 @@
 		    				}		    	
 		    				else{
 		    					if( $x==floor($x)){ 	    					
-		    						$xs=$x."am";
-		    						echo "true";
+		    						$xs=$x."am";		    						
 		    					}
 		    					else
 		    						$xs=floor($x).":30am";
