@@ -1,0 +1,226 @@
+body{
+    margin:0;
+    color:#6a6f8c;
+    background:#c8c8c8;
+    font:600 16px/18px 'Open Sans',sans-serif;
+    box-sizing: border-box;
+    
+}
+
+input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
+}
+
+select {
+-webkit-appearance:none;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.forms {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+
+.left{ 
+    margin-top: 3em;   
+    width:45%;
+    min-width: 25em;
+    float:left;
+    margin-left: 2em;
+    clear: left;
+}
+
+.right{
+    margin-top: 3em;
+    min-width: 25em;
+    width: 45%;
+    float:right;
+    margin-right: 2em;
+    clear: right;
+}
+ 
+.tags
+{
+    text-align: center;
+}
+#faltu{
+    padding-top:2em;
+    clear:both;
+}
+
+.show{
+    margin-left: 2em;
+    width: 26em;
+    min-width: 26em;
+    margin-bottom: 2em;
+}
+
+.logout{
+    min-height: 3em;
+    width: 7.5em;
+    position: relative;
+    text-align: center;
+    color: white;    
+    background:rgba(40,57,101,.9);
+    margin-right: 2em;  
+    float: right;
+    vertical-align: middle;
+    line-height: 2.9em;    
+    border-radius: 25px;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+#log{
+    color:white;
+}
+#newsh{
+    min-height: 3em;
+    width: 7.5em;
+    position: relative;
+    text-align: center;
+    color: white;    
+    background:rgba(40,57,101,.9);
+    margin-left: 2em;  
+    float: left;
+    vertical-align: middle;
+    line-height: 2.9em;    
+    border-radius: 25px;
+    box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+#sch{
+    color:white;
+}
+#title,#greet{
+    margin-top: 1em;
+    text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 1.5em;
+  padding-right: 1em;
+  padding-top: 1em;
+  margin: 0;
+}
+
+.list{
+    background:rgba(255,255,255,0.7);
+    width:90%;
+    padding: 0.7em;
+    border-radius: 10px;    
+    -moz-box-shadow:    inset 0 0 10px #000000;
+   -webkit-box-shadow: inset 0 0 10px #000000;
+   box-shadow:         inset 0 0 10px #000000;
+}
+input[type="radio"]:checked:before {
+    content: "";
+    display: block;
+    position: relative;
+    top: 3px;
+    left: 3px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4CAF50;
+}
+#radio1,#radio2,#radio3{
+    max-width: 33%;
+    margin-left: 6%;
+}
+#for1,#for2,#for3{
+    max-width: 33%;
+    margin-left: 4%;
+}
+#date{
+    text-align: center;
+}
+
+.body1{
+    clear: both;
+  padding     : 1.5em;
+  font-family : sans-serif;
+  line-height : 1.5;  
+}
+
+.tabbed{
+  float : left;
+  width : 100%;
+}
+
+.tabbed > input{
+  display : none;
+}
+
+.tabbed > section > h1{
+  float       : left;
+  box-sizing  : border-box;
+  margin      : 0;
+  padding     : 0.5em 0.5em 0;
+  overflow    : hidden;
+  font-size   : 1em;
+  font-weight : normal;
+}
+
+.tabbed > input:first-child + section > h1{
+  padding-left : 5%;
+}
+
+.tabbed > section > h1 > label{
+  display                 : block;
+  padding                 : 0.25em 0.75em;
+  border                  : 1px solid #ddd;
+  border-bottom           : none;
+  border-top-left-radius  : 4px;
+  border-top-right-radius : 4px;
+  box-shadow              : 0 0 0.6em rgba(0,0,0,0.6);
+  background              : #fff;
+  cursor                  : pointer;
+     -moz-user-select     : none;
+      -ms-user-select     : none;
+  -webkit-user-select     : none;
+}
+
+.tabbed > section > div{
+  position      : relative;
+  z-index       : 1;
+  float         : right;
+  box-sizing    : border-box;
+  width         : 100%;
+  margin        : 2.5em 0 0 -100%;
+  padding       : 0.5em 0.75em;
+  border        : 1px solid #ddd;
+  border-radius : 4px;
+  box-shadow    : 0 0 1em rgba(0,0,0,0.6);
+  background    : #fff;
+  margin-bottom: 2em;
+}
+
+.tabbed > input:checked + section > h1{
+  position : relative;
+  z-index  : 2;
+}
+
+.tabbed > input:not(:checked) + section > div{
+  display : none;
+}
