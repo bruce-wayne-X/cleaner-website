@@ -1,4 +1,4 @@
-<?php
+mysql<?php
    session_start(); //starts the session
    if($_SESSION['user']){ // checks if the user is logged in  
    }
@@ -13,9 +13,10 @@
         <title>Allocator</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel= "stylesheet" href="home.css" type="text/css">                    
-
+mysql
 		<script>
 			function showUser(str,str2,str3,str4) {
+
 			    if (str == "") {
 			        document.getElementById("txtHint").innerHTML = "";
 			        return;
@@ -35,10 +36,12 @@
 			        //window.alert(5 + 6);
 			        xmlhttp.open("GET","getuser.php?id="+qwer()+"&q="+str+"&q2="+str2+"&q3="+str3+"&q4="+str4,true);//nameid(integer),bathroomid(integer),10.5(string)
 			        //window.alert(5 + 8);
+
 			        xmlhttp.send();
 			        //window.alert(5 + 9);
 			    }
 			}
+
 		function getState(y,x,z) {
 			        if (window.XMLHttpRequest) {
 			            // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -54,25 +57,9 @@
 			        };
 			        xmlhttp.open("GET","findState.php?id="+qwer()+"&x="+x+"&y="+y+"&z="+z,true);//nameid(integer),bathroomid(integer),10.5(string)
 			        //window.alert(5 + 8);
+
 			        xmlhttp.send();
 			    }
-		function displaygetBuilding1(building,date)
-		{
-		        if (window.XMLHttpRequest) {
-		            // code for IE7+, Firefox, Chrome, Opera, Safari
-		            xmlhttp = new XMLHttpRequest();
-		        } else {
-		            // code for IE6, IE5
-		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-		        }
-		        xmlhttp.onreadystatechange = function() {
-		            if (this.readyState == 4 && this.status == 200) {
-		                document.getElementById('displayfloorx').innerHTML = this.responseText;
-		            }
-		        };
-		        xmlhttp.open("GET","displayfindbuilding1.php?id="+qwert()+"&building="+building+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
-		        xmlhttp.send();
-		}
 		function displaygetBuilding(building)
 		{
 		        if (window.XMLHttpRequest) {
@@ -90,10 +77,27 @@
 		        xmlhttp.open("GET","displayfindbuilding.php?id="+qwert()+"&building="+building,true);//nameid(integer),bathroomid(integer),10.5(string)
 		        xmlhttp.send();
 		}
+		function displaygetBuilding1(building,date)
+		{
+		        if (window.XMLHttpRequest) {
+		            // code for IE7+, Firefox, Chrome, Opera, Safari
+		            xmlhttp = new XMLHttpRequest();
+		        } else {
+		            // code for IE6, IE5
+		            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		        }
+		        xmlhttp.onreadystatechange = function() {
+		            if (this.readyState == 4 && this.status == 200) {
+		                document.getElementById('displayfloorx').innerHTML = this.responseText;
+		            }
+		        };
+		        xmlhttp.open("GET","displayfindbuilding1.php?id="+qwert()+"&building="+building+"&date="+date,true);//nameid(integer),bathroomid(integer),10.5(string)
+		        xmlhttp.send();
+		}
 		function displaygetDate(date)
 		{		
 				document.getElementById('hikuchh').style.display = 'none';
-				document.getElementById('abuilding1').style.display = 'block';		
+				document.getElementById('abuilding1').style.display = 'block';	
 		        if (window.XMLHttpRequest) {
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
 		            xmlhttp = new XMLHttpRequest();
@@ -111,8 +115,8 @@
 		}
 		function allotgetDate(date)
 		{		
-				document.getElementById('hikuch').style.display = 'none';
-				document.getElementById('axbuilding1').style.display = 'block';		
+				document.getElementById('hikuch').style.display = 'none';		
+				document.getElementById('axbuilding1').style.display = 'block';	
 		        if (window.XMLHttpRequest) {
 		            // code for IE7+, Firefox, Chrome, Opera, Safari
 		            xmlhttp = new XMLHttpRequest();
@@ -202,6 +206,8 @@
 		        xmlhttp.send();
 				
 		}
+
+
 		function displaygetfloor(floor,building)
 		{
 		        //window.alert(5 + 8);
@@ -259,14 +265,12 @@
             document.getElementById('displayfloorx').innerHTML = "";
             document.getElementById('showtable').innerHTML = "";
             document.getElementById("abuilding").selectedIndex=0;
-            document.getElementById("date_dis1x").selectedIndex=0;
 		}
 		function radio1()
 		{
             document.getElementById('allotfloorx').innerHTML = "";
             document.getElementById('allottable').innerHTML = "";			
             document.getElementById("axbuilding").selectedIndex=0;
-            document.getElementById("date_disx").selectedIndex=0;
 		}
 		function show() { 
 			document.getElementById('date_dis').style.display = 'block';
@@ -274,9 +278,6 @@
 			document.getElementById('hikuch').style.display = 'block';
 		}
 		function hide() { document.getElementById('date_dis').style.display = 'none'; 
-			document.getElementById('hikuch').style.display = 'none';
-			document.getElementById('axbuilding1').style.display = 'none';
-			document.getElementById('axbuilding').style.display = 'block';
 		}
 		function showw() { 
 			document.getElementById('date_dis1').style.display = 'block';
@@ -284,9 +285,6 @@
 			document.getElementById('hikuchh').style.display = 'block';
 		}
 		function hidd() { document.getElementById('date_dis1').style.display = 'none'; 
-			document.getElementById('hikuchh').style.display = 'none';
-			document.getElementById('abuilding1').style.display = 'none';
-			document.getElementById('abuilding').style.display = 'block';
 		}	    		
 		</script>
     </head>
@@ -313,10 +311,10 @@
 	</div>
 	<div id="date_dis" style="display: none;">
 	<?php
-		error_reporting(E_ALL ^ E_DEPRECATED);
+
 		$con1=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
 		$query12=mysqli_query($con1,"Select distinct date_of_occ from occasion_schedule ");
-		echo('<select id = "date_disx"name="datebuilding" onChange="allotgetDate(this.value)">');
+		echo('<select name="datebuilding" onChange="allotgetDate(this.value)">');
 		echo('<option value="">Choose Date</option>');
 		while($row=mysqli_fetch_array($query12))
 		{
@@ -328,8 +326,8 @@
 	</div>	
 	<div id="myd"></div>
 	<?php
-		error_reporting(E_ALL ^ E_DEPRECATED);
-		$con2=mysqli_connect("localhost","root","") or die(mysqli_error());
+
+		$con2=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
 		$query=mysqli_query($con2,"SELECT distinct building FROM bathschedule order by building asc");
 		echo('<label>Choose Building</label>');
 		echo('<select id="axbuilding" onChange="allotgetBuilding(value)">');
@@ -353,14 +351,14 @@
 	<div class="check">Schedule For:		
 		<input type="radio" name="group2" id="2" onchange="radio2()" value="1" checked onclick="hidd();">Week Days
 		<input type="radio" name="group2" id="2" onchange="radio2()" value="2" onclick="showw();">Special Occasions	
-		<input type="radio" name="group2" id="2" onchange="radio2()" value="3" onclick="hidd();">Weekend<br><br>
+		<input type="radio" name="group2" id="2" onchange="radio2()" value="3"  onclick="hidd();">Weekend<br><br>
 	</div>
 	<div id="date_dis1" style="display: none;">
 	<?php
-		error_reporting(E_ALL ^ E_DEPRECATED);
+
 		$con3=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
 		$query123=mysqli_query($con3,"Select distinct date_of_occ from occasion_schedule ");
-		echo('<select id="date_dis1x" name="datebuildingx" onChange="displaygetDate(this.value)">');
+		echo('<select name="datebuildingx" onChange="displaygetDate(this.value)">');
 		echo('<option value="">Choose Date</option>');
 		while($row1=mysqli_fetch_array($query123))
 		{
@@ -371,8 +369,8 @@
 	?>	
 	</div>
 
-	<?php  
-		error_reporting(E_ALL ^ E_DEPRECATED);
+	<?php
+
 		$con4=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
 		$query=mysqli_query($con4,"SELECT distinct building FROM bathschedule order by building asc");
 		echo('<label>Choose Building</label>');
@@ -384,6 +382,7 @@
 			echo('<option value="'.$rowbuilding.'">'.$rowbuilding.'</option>');
 		}
 		echo('</select>');
+
 		
 	?>
 	<div id="hikuchh" style="display: none;">
@@ -393,5 +392,6 @@
 	<div id="showtable"></div>
 </div>
 </div>
+
 </body>
-</html> 
+</html>	

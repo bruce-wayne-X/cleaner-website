@@ -6,8 +6,7 @@
 	//echo($id);
 
 	error_reporting(E_ALL ^ E_DEPRECATED);
-	mysql_connect("localhost","root","") or die(mysql_error());
-	mysql_select_db("first_db") or die("Cannor connect to server");
+	$con1=mysqli_connect("localhost","root","","first_db") or die(mysqli_error());
 	if($id==1)
 		$query="SELECT distinct floor FROM bathschedule where building = '$building' and date_of_occ = '$date' order by floor asc";
 	else if($id==2)
@@ -15,7 +14,7 @@
 	else if($id==3)
 		$query="SELECT distinct floor FROM bathschedule1 where building = '$building' and date_of_occ = '$date' order by floor asc";
 	
-	$result=mysql_query($query);
+	$result=mysqli_query($con1,$query);
 	
 	if($result === FALSE) { 
 	}
@@ -24,7 +23,7 @@
 		echo('<label>Choose Floor</label>');
 		echo'<select name="floorx" onChange="allotgetfloor1(this.value,\''.$building.'\',\''.$date.'\')">';
 		echo("<option value=''>Select One</option>");	
-			while ($row=mysql_fetch_array($result)) { 
+			while ($row=mysqli_fetch_array($result)) { 
 				$rwid=$row['floor'];
 			echo"<option value=" .$row['floor']."> ".$row['floor']."</option>";
 			}

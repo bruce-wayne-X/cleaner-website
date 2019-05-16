@@ -7,16 +7,16 @@
 	}
 	if($_SERVER['REQUEST_METHOD'] = "POST") //Added an if to keep the page secured
 	{
-		$old = mysql_real_escape_string($_POST['old_password']);
-		$new = mysql_real_escape_string($_POST['new_password']);
+		$con1=mysqli_connect("localhost", "root",""."first_db") or die(mysqli_error()); //Connect to server
+		$old = mysqli_real_escape_string($con1,$_POST['old_password']);
+		$new = mysqli_real_escape_string($con1,$_POST['new_password']);
 		$userq=$_SESSION['user'];
-		mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
-		mysql_select_db("first_db") or die("Cannot connect to database"); //Connect to database				
-		$query = mysql_query("Select * from cleaners WHERE name='$userq'"); // Query the users table
-		$row=mysql_fetch_assoc($query);
+
+		$query = mysqli_query($con1,"Select * from cleaners WHERE name='$userq'"); // Query the users table
+		$row=mysqli_fetch_assoc($query);
 		if($row['password']==$old)
 		{
-			mysql_query("Update cleaners set password = '$new' where name = '$userq'");
+			mysqli_query($con1,"Update cleaners set password = '$new' where name = '$userq'");
 			Print '<script>alert("Password Successfully Changed");</script>'; // Prompts the user
         	Print '<script>window.location.assign("home.php");</script>'; // redirects to login.php}
         }

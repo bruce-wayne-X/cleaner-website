@@ -1,19 +1,20 @@
 
 <?php
     session_start();
-    $username = mysql_real_escape_string($_POST['username']);//sql injection
-    $password = mysql_real_escape_string($_POST['password']);
+
+    $con1=mysqli_connect("localhost", "root", "","first_db") or die (mysqli_error()); //Connect to server,and database
+    //mysql_select_db("first_db") or die ("Cannot connect to databasekng"); //Connect to database
+    $username = mysqli_real_escape_string($con1,$_POST['username']);//sql injection
+    $password = mysqli_real_escape_string($con1,$_POST['password']);
     $bool = true;
 
-    mysql_connect("localhost", "root", "") or die (mysql_error()); //Connect to server
-    mysql_select_db("first_db") or die ("Cannot connect to database"); //Connect to database
-    $query = mysql_query("Select * from administrator WHERE username='$username'"); // Query the users table
-    $exists = mysql_num_rows($query); //Checks if username exists
+    $query = mysqli_query($con1,"Select * from administrator WHERE username='$username'"); // Query the users table
+    $exists = mysqli_num_rows($query); //Checks if username exists
     $table_users = "";
     $table_password = "";
     if($exists > 0) //IF there are no returning rows or no existing username
     {
-       while($row = mysql_fetch_assoc($query)) // display all rows from query
+       while($row = mysqli_fetch_assoc($query)) // display all rows from query
        {
           $table_users = $row['username']; // the first username row is passed on to $table_users, and so on until the query is finished
           $table_password = $row['password']; // the first password row is passed on to $table_password, and so on until the query is finished
@@ -37,4 +38,4 @@
         Print '<script>alert("Incorrect username!");</script>'; // Prompts the user
         Print '<script>window.location.assign("../index.php");</script>'; // redirects to login.php
     }
-?>
+?>  

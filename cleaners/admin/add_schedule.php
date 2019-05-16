@@ -37,10 +37,9 @@
   </div>
   <?php
     error_reporting(E_ALL ^ E_DEPRECATED);
-    mysql_connect("localhost", "root","") or die(mysql_error()); //Connect to server
-    mysql_select_db("first_db") or die("Cannot connect to database"); //Connect to database       
-    $query = mysql_query("SELECT * FROM schedulelist ORDER BY scheduleno ASC LIMIT 1");
-    $row = mysql_fetch_row($query);
+    $con1=mysqli_connect("localhost", "root","","first_db") or die(mysqli_error()); //Connect to server
+    $query = mysqli_query($con1,"SELECT * FROM schedulelist ORDER BY scheduleno ASC LIMIT 1");
+    $row = mysqli_fetch_row($query);
     $userq=$_SESSION['user'];
     if ($row[0]!=0)
     {
